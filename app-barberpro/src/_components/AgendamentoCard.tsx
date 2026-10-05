@@ -37,13 +37,11 @@ interface AgendamentoCardProps {
 export function AgendamentoCard({ agendamento, onCancelar }: AgendamentoCardProps) {
   if (!agendamento) return null;
 
-  // Extração de dados com segurança
   const barbeariaNome = agendamento.barbeiros?.barbearias?.nome || 'Barbearia';
   const barbeiroNome = agendamento.barbeiros?.usuarios?.nome || 'Barbeiro';
   const servicoNome = agendamento.servicos?.nome || 'Serviço';
   const preco = Number(agendamento.servicos?.preco || 0).toFixed(2).replace('.', ',');
 
-  // Formatação de Horário (Ex: "14:00") e Formatação de Data (Ex: "27 de fev.")
   const dataIso = String(agendamento.data).slice(0, 10);
   const [ano, mes, dia] = dataIso.split("-").map(Number);
   const dataFormatada = new Date(ano, mes - 1, dia, 12).toLocaleDateString(
@@ -78,7 +76,7 @@ export function AgendamentoCard({ agendamento, onCancelar }: AgendamentoCardProp
       <View style={styles.headerRow}>
         <Text style={styles.barbeariaName}>{barbeariaNome}</Text>
 
-        {/* O Balãozinho de Status dinâmico */}
+        {/* O Balão de Status dinâmico */}
         <View
           style={[
             styles.statusBadge,
