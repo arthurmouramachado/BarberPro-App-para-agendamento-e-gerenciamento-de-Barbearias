@@ -1,13 +1,11 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
-
-// Tipagem do contexto atualizada com Plano
 interface AgendamentoContextData {
   barbeariaId: number | null;
   servicoId: number | null;
   planoId: number | null; 
   barbeiroId: number | null;
-  dataSelecionada: string | null; // Formato YYYY-MM-DD
-  horarioSelecionado: string | null; // Formato HH:MM
+  dataSelecionada: string | null; 
+  horarioSelecionado: string | null; 
   selecionarBarbearia: (id: number) => void;
   selecionarServico: (id: number) => void;
   selecionarPlano: (id: number) => void; 
@@ -22,7 +20,7 @@ const AgendamentoContext = createContext<AgendamentoContextData>({} as Agendamen
 export const AgendamentoProvider = ({ children }: { children: ReactNode }) => {
   const [barbeariaId, setBarbeariaId] = useState<number | null>(null);
   const [servicoId, setServicoId] = useState<number | null>(null);
-  const [planoId, setPlanoId] = useState<number | null>(null); // 👈 Adicionado
+  const [planoId, setPlanoId] = useState<number | null>(null); 
   const [barbeiroId, setBarbeiroId] = useState<number | null>(null);
   const [dataSelecionada, setDataSelecionada] = useState<string | null>(null);
   const [horarioSelecionado, setHorarioSelecionado] = useState<string | null>(null);

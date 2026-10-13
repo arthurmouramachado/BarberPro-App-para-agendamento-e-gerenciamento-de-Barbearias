@@ -35,7 +35,6 @@ export const ModalPix: React.FC<ModalPixProps> = ({
   const [cpf, setCpf] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Estados do Pagamento Real
   const [pixGerado, setPixGerado] = useState(false);
   const [confirmado, setConfirmado] = useState(false);
   const [pagamentoId, setPagamentoId] = useState<number | null>(null);
@@ -45,9 +44,6 @@ export const ModalPix: React.FC<ModalPixProps> = ({
   const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const geracaoAtual = useRef(0);
 
-  // ==================================================
-  // LIMPEZA DO POLLING
-  // ==================================================
   const pararPolling = () => {
     if (pollingRef.current) {
       clearInterval(pollingRef.current);
@@ -55,9 +51,6 @@ export const ModalPix: React.FC<ModalPixProps> = ({
     }
   };
 
-  // ==================================================
-  // POLLING: VERIFICAR STATUS DO PAGAMENTO NA API
-  // ==================================================
   useEffect(() => {
     if (!visible || !pixGerado || !pagamentoId || confirmado) return;
 
@@ -101,9 +94,6 @@ export const ModalPix: React.FC<ModalPixProps> = ({
     };
   }, [agendamentoId]);
 
-  // ==================================================
-  // 1. GERAR PIX VIA API
-  // ==================================================
   const handleGerarPix = async () => {
     if (loading || pixGerado) return;
     const cpfLimpo = cpf.replace(/\D/g, "");
@@ -128,7 +118,7 @@ export const ModalPix: React.FC<ModalPixProps> = ({
       });
       if (numeroGeracao !== geracaoAtual.current) return;
 
-      // Suporta múltiplos formatos de resposta da sua API/AbacatePay
+     
       const idRetornado =
         response?.pagamentoId ||
         response?.id ||
@@ -181,9 +171,6 @@ export const ModalPix: React.FC<ModalPixProps> = ({
     }
   };
 
-  // ==================================================
-  // 2. COPIAR CÓDIGO PIX
-  // ==================================================
   const handleCopiarPix = async () => {
     if (!codigoPix) {
       Alert.alert("Aviso", "Código PIX indisponível para cópia.");
@@ -198,9 +185,6 @@ export const ModalPix: React.FC<ModalPixProps> = ({
     );
   };
 
-  // ==================================================
-  // 3. SIMULAR PAGAMENTO (MODO DEV)
-  // ==================================================
   const handleSimularPagamento = async () => {
     if (!__DEV__ || !pagamentoId || loading) return;
     const numeroGeracao = geracaoAtual.current;
@@ -230,18 +214,15 @@ export const ModalPix: React.FC<ModalPixProps> = ({
     }
   };
 
-  // ==================================================
+  
   // 4. FINALIZAR
-  // ==================================================
   const handleFinalizar = () => {
     if (!confirmado) return;
     pararPolling();
     onSuccess();
   };
 
-  // ==================================================
   // 5. FECHAR
-  // ==================================================
   const handleFechar = () => {
     pararPolling();
     // Preserva a cobrança para reabrir o mesmo Pix sem criar outro pagamento.
@@ -275,9 +256,7 @@ export const ModalPix: React.FC<ModalPixProps> = ({
               R$ {valor.toFixed(2).replace(".", ",")}
             </Text>
 
-            {/* ==========================================
-                PAGAMENTO CONFIRMADO
-            ========================================== */}
+            {/* PAGAMENTO CONFIRMADO */}
             {confirmado ? (
               <View style={styles.successBox}>
                 <Text style={styles.successIcon}>✓</Text>
@@ -301,9 +280,7 @@ export const ModalPix: React.FC<ModalPixProps> = ({
                 </TouchableOpacity>
               </View>
             ) : !pixGerado ? (
-              /* ========================================
-                  FORMULÁRIO CPF
-              ======================================== */
+              /* FORMULÁRIO CPF */
               <View style={styles.stepContainer}>
                 <Text style={styles.label}>CPF do Titular do Pagamento:</Text>
 
@@ -331,9 +308,7 @@ export const ModalPix: React.FC<ModalPixProps> = ({
                 </TouchableOpacity>
               </View>
             ) : (
-              /* ========================================
-                  PIX GERADO / QR CODE
-              ======================================== */
+              /*  PIX GERADO / QR CODE */
               <View style={styles.stepContainer}>
                 <View style={styles.fakeQRCode}>
                   {qrCodeUrl ? (

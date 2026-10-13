@@ -73,7 +73,6 @@ export function UserCard() {
 
       <View style={styles.userInfo}>
         <Text style={styles.userName}>{nomeUsuario}</Text>
-        {/* No futuro podemos colocar um email ou status aqui */}
       </View>
     </View>
   );

@@ -10,12 +10,10 @@ type ButtonProps = TouchableOpacityProps & {
 
 export function Button({ label, style, icon, isActive = false, ...rest }: ButtonProps) {
   
-  // O SEGREDO ESTÁ AQUI: Forçamos o TypeScript a entender que são exatamente 2 cores obrigatórias
   const gradientColors = isActive 
     ? ["#155DFC", "#3B82F6"] as const
     : ["#E2E8F0", "#E2E8F0"] as const;
 
-  // Alterna as cores do texto/ícone
   const textColor = isActive ? '#FFFFFF' : '#94A3B8';
 
   return (

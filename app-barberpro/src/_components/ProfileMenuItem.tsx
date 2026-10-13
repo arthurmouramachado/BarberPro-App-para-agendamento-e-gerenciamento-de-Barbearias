@@ -1,6 +1,5 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Feather from "@expo/vector-icons/Feather";
-import React from "react";
 import {
   StyleSheet,
   Text,
@@ -44,7 +43,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginHorizontal: 20,
     marginBottom: 16,
-    // Sombra do card
     shadowColor: "#0F172A",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.04,
@@ -59,7 +57,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "#EBF2FF", // Fundo azul bem clarinho
+    backgroundColor: "#EBF2FF", 
     justifyContent: "center",
     alignItems: "center",
     marginRight: 12,
