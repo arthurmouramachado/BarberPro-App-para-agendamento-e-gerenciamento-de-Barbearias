@@ -1,29 +1,14 @@
-import { Stack } from "expo-router";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { Stack } from "expo-router";
 
-import {
-  Inter_400Regular,
-  Inter_600SemiBold,
-  Inter_700Bold,
-  useFonts,
-} from "@expo-google-fonts/inter";
+import { useAppFonts } from "@/hooks/useAppFonts";
 
-import {
-  ActivityIndicator,
-  Text,
-  View,
-} from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 
 export default function RootLayout() {
-  const [fontsLoaded, fontError] = useFonts({
-    Inter_400Regular,
-    Inter_600SemiBold,
-    Inter_700Bold,
-  });
+  const { loaded: fontsLoaded, error: fontError, retry } = useAppFonts();
 
   if (fontError) {
-    console.error("Erro ao carregar fontes:", fontError);
-
     return (
       <View
         style={{
@@ -32,7 +17,19 @@ export default function RootLayout() {
           alignItems: "center",
         }}
       >
-        <Text>Erro ao carregar as fontes.</Text>
+        <Text>Não foi possível carregar as fontes. Confira sua conexão.</Text>
+        <TouchableOpacity
+          onPress={retry}
+          accessibilityRole="button"
+          style={{ marginTop: 16, padding: 12, backgroundColor: "#155DFC", borderRadius: 8 }}
+        >
+          <Text style={{ color: "#FFFFFF" }}>Tentar novamente</Text>
+        </TouchableOpacity>
+        {__DEV__ && (
+          <Text selectable style={{ marginTop: 16, paddingHorizontal: 24 }}>
+            {fontError.message}
+          </Text>
+        )}
       </View>
     );
   }

@@ -1,6 +1,7 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { BarbeiroDTO, barbeiroService } from "@/services/barbeiroService";
 import { Ionicons } from "@expo/vector-icons";
+import { Trash2 } from "lucide-react-native";
 import { Redirect, useFocusEffect, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import {
@@ -137,7 +138,7 @@ export default function ExcluirBarbeiroAdmin() {
           {estaExcluindo ? (
             <ActivityIndicator size="small" color="#FFFFFF" />
           ) : (
-            <Ionicons name="trash-outline" size={21} color="#FFFFFF" />
+            <Trash2 size={21} color="#FFFFFF" />
           )}
         </TouchableOpacity>
       </View>

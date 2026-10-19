@@ -14,7 +14,7 @@ import { BarbeariasService } from './barbearias.service';
 import { CreateBarbeariaDto } from './dto/create-barbearia.dto';
 import { UpdateBarbeariaDto } from './dto/update-barbearia.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { extname } from 'path';
+import { extname, join } from 'path';
 import { diskStorage } from 'multer';
 
 @Controller('barbearias')
@@ -26,7 +26,7 @@ export class BarbeariasController {
     FileInterceptor('foto', {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       storage: diskStorage({
-        destination: './uploads',
+        destination: join(process.cwd(), 'uploads'),
         filename: (
           _req: any,
           file: { originalname: string },

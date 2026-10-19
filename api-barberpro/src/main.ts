@@ -21,7 +21,7 @@ async function bootstrap() {
 
   app.enableCors();
 
-  app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
+  app.use('/uploads', express.static(join(process.cwd(), 'uploads')));
 
   await app.listen(process.env.PORT ?? 3000);
 }

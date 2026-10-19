@@ -4,7 +4,7 @@ import { StaggeredText } from "@/_components/ui/AnimatedText";
 import { colors } from "@/colors";
 import { useAuth } from "@/contexts/AuthContext";
 import { Inter_400Regular, Inter_700Bold, useFonts } from "@expo-google-fonts/inter";
-import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
+import { MapPin } from "lucide-react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Location from "expo-location";
 import { useEffect, useState } from "react";
@@ -147,7 +147,7 @@ export default function HomeCliente() {
               obterLocalizacao();
             }}
           >
-            <SimpleLineIcons name="location-pin" size={24} color="#FFFFFF" />
+            <MapPin size={24} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
 
